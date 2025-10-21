@@ -115,6 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const GOOGLE_CLIENT_ID = '315735459323-bs54tbot9io5bfvklg8vq56g9o7q5ar5.apps.googleusercontent.com';
 
     const signInButton = document.querySelector('.btn-secondary');
+    // Track connected state
+    let connectedInfo = null;
     function handleCredentialResponse(response) {
         console.debug('GSI credential response:', response);
         // response.credential is the ID token (JWT)
@@ -139,9 +141,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // We'll use our custom button to trigger the popup
                 if (signInButton) {
                     signInButton.addEventListener('click', () => {
+                        // If already connected, treat as logout
+                        if (connectedInfo && connectedInfo.ok) {
+                            // Open extension connect page with disconnect action
+                            const extUrl = `chrome-extension://${EXTENSION_ID}/connect.html?action=disconnect`;
+                            window.open(extUrl, '_blank');
+                            showNotification('Opening extension to disconnect...', 'info');
+                            return;
+                        }
                         // Show the GSI prompt
                         google.accounts.id.prompt();
-                        // Also show the chooser if popup flow desired
                         google.accounts.id.renderButton(document.createElement('div'), { theme: 'outline', size: 'large' });
                     });
                 }
@@ -153,6 +162,28 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (e) {
         console.warn('GSI init failed', e);
     }
+
+    // Listen for postMessage from connect.html
+    window.addEventListener('message', (ev) => {
+        try {
+            const msg = ev.data || {};
+            if (msg.type === 'pn:connected') {
+                connectedInfo = msg;
+                if (msg.ok) {
+                    if (signInButton) signInButton.textContent = 'Logout';
+                    showNotification('Connected: ' + (msg.email || ''), 'success');
+                    localStorage.setItem('pn_linked_email', msg.email || '');
+                } else {
+                    showNotification('Connection failed: ' + (msg.error || ''), 'info');
+                }
+            } else if (msg.type === 'pn:disconnected') {
+                connectedInfo = null;
+                if (signInButton) signInButton.textContent = 'Sign In';
+                showNotification('Disconnected', 'info');
+                localStorage.removeItem('pn_linked_email');
+            }
+        } catch (e) { console.warn('postMessage handler error', e); }
+    });
 
     // Demo video scroll function
     window.scrollToDemo = function() {
