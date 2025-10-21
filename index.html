@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishNinja - Advanced Web Protection</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="shortcut icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body data-theme="dark">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="icon.png" alt="PhishNinja Logo" class="logo">
+                <span class="logo-text">PhishNinja</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <div class="theme-switch">
+                    <button id="theme-toggle" class="theme-btn">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="btn-secondary">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Advanced Phishing<br>
+                    Protection <span class="gradient-text">for</span><br>
+                    <span class="gradient-text">Modern Web</span>
+                </h1>
+                <p class="hero-description">
+                    Protect your browsing experience with our cutting-edge anti-phishing technology. 
+                    Block malicious websites, prevent phishing attacks, and secure your data 
+                    with enterprise-grade protection.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" id="addToChrome">Add to Chrome</button>
+                    <button class="btn-outline btn-large" onclick="scrollToDemo()">Watch Demo</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Threat Detection</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="usersCount">1M+</span>
+                        <span class="stat-label">Users Protected</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Monitoring</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="shield-animation">
+                    <div class="shield-icon">
+                        <img src="icon.png" alt="Shield" class="shield-img">
+                    </div>
+                    <div class="protection-ring"></div>
+                    <div class="security-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Security Features</h2>
+                <p>Comprehensive protection against all types of web threats</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Real-time Threat Detection</h3>
+                    <p>Advanced AI-powered scanning detects and blocks malicious websites before they can harm your system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"/>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Phishing Protection</h3>
+                    <p>Identify and prevent phishing attempts with our comprehensive database of known malicious sites.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1v6l4-4"/>
+                            <path d="M12 7v14"/>
+                            <path d="M8 17l4 4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Ad Blocker</h3>
+                    <p>Block intrusive advertisements and tracking scripts to improve your browsing speed and privacy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+                        </svg>
+                    </div>
+                    <h3>Privacy Protection</h3>
+                    <p>Block tracking scripts and protect your privacy while browsing the web.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Fast Performance</h3>
+                    <p>Lightweight protection that doesn't slow down your browsing experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>24/7 Monitoring</h3>
+                    <p>Continuous monitoring and updates to keep you protected against emerging threats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section id="demo" class="demo-video">
+        <div class="container">
+            <div class="section-header">
+                <h2>See PhishNinja in Action</h2>
+                <p>Watch how our advanced protection keeps you safe from phishing attacks</p>
+            </div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="PhishNinja Demo Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <p>Have questions or need support? We're here to help!</p>
+            </div>
+            <div class="contact-content-centered">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="hidden" name="fvv" value="1">
+                        <input type="hidden" name="draftResponse" value="[null,null,&quot;-1&quot;]">
+                        <input type="hidden" name="pageHistory" value="0">
+                        <div class="form-group">
+                            <input type="text" name="entry.1336465198" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="entry.1933259968" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="entry.1322646347" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="icon.png" alt="PhishNinja Logo" class="logo">
+                        <span>PhishNinja</span>
+                    </div>
+                    <p>Advanced anti-phishing protection for the modern internet. Keep your browsing safe and secure.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Download</a></li>
+                        <li><a href="#">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhishNinja. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
