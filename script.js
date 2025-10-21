@@ -117,6 +117,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = document.querySelector('.btn-secondary');
     // Track connected state
     let connectedInfo = null;
+
+    // Render profile UI in the sign-in button (avatar + email) when connected
+    function renderProfile(info) {
+        if (!signInButton) return;
+        if (!info || !info.ok) {
+            signInButton.innerHTML = 'Sign In';
+            signInButton.title = 'Sign in with Google';
+            return;
+        }
+
+        const email = info.email || '';
+        const picture = info.picture || '';
+
+        // Build avatar + email markup
+        const imgHtml = picture ? `<img src="${picture}" alt="avatar" style="width:24px;height:24px;border-radius:50%;margin-right:8px;vertical-align:middle;">` : `<span style="display:inline-block;width:24px;height:24px;border-radius:50%;background:#ddd;margin-right:8px;vertical-align:middle;text-align:center;line-height:24px;color:#555;font-size:12px;">${email ? email[0].toUpperCase() : '?'}</span>`;
+        signInButton.innerHTML = `${imgHtml}<span style="vertical-align:middle">${email}</span>`;
+        signInButton.title = `Connected: ${email}`;
+    }
+
+    // On load, check localStorage for persisted linked info and render
+    (function restoreLinkedProfile() {
+        try {
+            const storedEmail = localStorage.getItem('pn_linked_email');
+            const storedPicture = localStorage.getItem('pn_linked_picture');
+            if (storedEmail) {
+                connectedInfo = { ok: true, email: storedEmail, picture: storedPicture || null };
+                renderProfile(connectedInfo);
+            } else {
+                renderProfile(null);
+            }
+        } catch (e) { console.warn('restoreLinkedProfile failed', e); }
+    })();
     function handleCredentialResponse(response) {
         console.debug('GSI credential response:', response);
         // response.credential is the ID token (JWT)
@@ -170,17 +202,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (msg.type === 'pn:connected') {
                 connectedInfo = msg;
                 if (msg.ok) {
-                    if (signInButton) signInButton.textContent = 'Logout';
                     showNotification('Connected: ' + (msg.email || ''), 'success');
+                    // Persist linked info for reloads
                     localStorage.setItem('pn_linked_email', msg.email || '');
+                    if (msg.picture) localStorage.setItem('pn_linked_picture', msg.picture);
+                    renderProfile({ ok: true, email: msg.email, picture: msg.picture });
                 } else {
                     showNotification('Connection failed: ' + (msg.error || ''), 'info');
                 }
             } else if (msg.type === 'pn:disconnected') {
                 connectedInfo = null;
-                if (signInButton) signInButton.textContent = 'Sign In';
                 showNotification('Disconnected', 'info');
                 localStorage.removeItem('pn_linked_email');
+                localStorage.removeItem('pn_linked_picture');
+                renderProfile(null);
             }
         } catch (e) { console.warn('postMessage handler error', e); }
     });
