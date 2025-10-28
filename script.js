@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Google Sign-in and linking to extension ---
     // Replace this with your extension's ID when deployed
-    const EXTENSION_ID = 'lomgioemmbcejmnbbblfbpoogbofffpp';
+    const EXTENSION_ID = 'ikcooobnaejnjglfncihcjjpalcgjhmb';
     const GOOGLE_CLIENT_ID = '315735459323-bs54tbot9io5bfvklg8vq56g9o7q5ar5.apps.googleusercontent.com';
 
     const signInButton = document.querySelector('.btn-secondary');
