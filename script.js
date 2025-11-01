@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addToChromeBtn = document.getElementById('addToChrome');
     addToChromeBtn.addEventListener('click', function() {
         // Simulate Chrome Web Store redirect
-        const chromeWebStoreUrl = 'https://chrome.google.com/webstore/category/extensions';
+        const chromeWebStoreUrl = 'https://chromewebstore.google.com/detail/ikcooobnaejnjglfncihcjjpalcgjhmb?utm_source=item-share-cb';
         window.open(chromeWebStoreUrl, '_blank');
         
         // Increment download count
